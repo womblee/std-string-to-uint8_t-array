@@ -5,8 +5,8 @@ void convert()
 {
     byte_data.erase(std::remove_if(byte_data.begin(), byte_data.end(), &bad_char), byte_data.end());
     
-    int three_last = 0;
-    char three_last_chars[4];
+    int last = 0;
+    char buffer[4];
     std::vector<int8_t> bytes;
     for (std::string::size_type i = 0; i < byte_data.size(); ++i)
     {
@@ -14,20 +14,21 @@ void convert()
         if (c == ' ')
         {
             std::string temp{};
-            for (char& s : three_last_chars)
+            for (char& s : buffer)
             {
                 temp += s;
             }
-    
-            int8_t conv = std::stoi(temp);
-            bytes.push_back(conv);
-    
-            three_last = 0;
+
+            char* p;
+            long n = strtol(temp.c_str(), &p, 16);
+            bytes.push_back(n);
+
+            last = 0;
         }
         else
         {
-            three_last_chars[three_last] = c;
-            three_last++;
+            buffer[last] = c;
+            last++;
         }
     }
     
