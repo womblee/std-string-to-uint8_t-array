@@ -4,21 +4,22 @@ std::string byte_data = "0x4d, 0x5a, 0x80, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0
 void convert()
 {
     byte_data.erase(std::remove_if(byte_data.begin(), byte_data.end(), &bad_char), byte_data.end());
-    
+    byte_data += ' '; // Add 1 space because we grab last 4 symbols before spaces, if not this, the last byte won't be grabbed
+
     int last = 0;
-    char buffer[4];
+    char buffer[4]{};
     std::vector<int8_t> bytes;
     for (std::string::size_type i = 0; i < byte_data.size(); ++i)
     {
         char c = byte_data[i];
         if (c == ' ')
         {
+            // Unite all 4 chars together
             std::string temp{};
             for (char& s : buffer)
-            {
                 temp += s;
-            }
 
+            // Convert the thing - (std::string)"0x53" -> (long)83
             char* p;
             long n = strtol(temp.c_str(), &p, 16);
             bytes.push_back(n);
