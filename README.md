@@ -1,5 +1,5 @@
 # std-string-to-uint8_t-array
-Converts an std::string to an int16_t array.
+Converts an std::string to an uint8_t array.
 
 This was made for people that want to use MemJect and download the binary via parsing a html body or something...
 
