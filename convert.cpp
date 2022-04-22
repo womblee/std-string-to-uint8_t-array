@@ -66,7 +66,8 @@ void convert()
             // Convert the thing - (std::string)"0x53" -> (long)83
             char* p;
             long n = strtol(temp.c_str(), &p, 16);
-            bytes.push_back(n);
+            uint8_t val = (uint8_t)n;
+            bytes.push_back(val);
 
             last = 0;
         }
